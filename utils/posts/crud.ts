@@ -1,4 +1,4 @@
-import { transformToPost } from "@/utils/posts/postHelpers.ts";
+import { transformToPost } from "@/utils/posts/helpers.ts";
 import type { MyPost } from "@/utils/posts/types.ts";
 
 export async function getPostRaw(slug: string) {

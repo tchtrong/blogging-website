@@ -1,14 +1,15 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import PostDetail from "@/components/PostDetail.tsx";
+import { trpcServer } from "@/trpc/server.ts";
 import { styles } from "@/utils/constants.ts";
 import { POST_ROUTES } from "@/utils/posts/constants.ts";
-import { getPost } from "@/utils/posts/postCRUD.ts";
-import { renderPostContent } from "@/utils/posts/postHelpers.ts";
 
 export const handler: Handlers = {
   async GET(_req, ctx) {
-    const post = await getPost(ctx.params.slug);
-    const renderedPostContent = renderPostContent(post.content);
+    const post = await trpcServer.post.getPost(ctx.params.slug);
+    const renderedPostContent = await trpcServer.post.renderPostContent(
+      post.content
+    );
     return ctx.render({ ...ctx.state, post, renderedPostContent });
   },
 };

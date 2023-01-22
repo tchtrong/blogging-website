@@ -10,9 +10,8 @@ import type { AppRouter } from "./server.ts";
  */
 const host = (() => {
   if (IS_BROWSER) {
-    console.log("Origin: ", location?.origin);
-    return location?.origin;
-  } else return "http://localhost:8000";
+    return globalThis.location.origin;
+  } else return "";
 })();
 
 export const trpcClient = createTRPCProxyClient<AppRouter>({

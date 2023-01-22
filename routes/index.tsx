@@ -2,12 +2,12 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { PostPreview } from "@/components/PostPreview.tsx";
 import { styles } from "@/utils/constants.ts";
 import { POST_ROUTES } from "@/utils/posts/constants.ts";
-import { getPostList } from "@/utils/posts/postCRUD.ts";
 import type { MyPost } from "@/utils/posts/types.ts";
+import { trpcServer } from "@/trpc/server.ts";
 
 export const handler: Handlers = {
   GET: async (_req, ctx) => {
-    const posts = await getPostList();
+    const posts = await trpcServer.post.getPostList();
     return ctx.render(posts);
   },
 };

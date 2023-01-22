@@ -1,6 +1,6 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import PostForm from "@/islands/PostForm.tsx";
-import { trpcClient } from "@/trpc/client.ts";
+import { trpcServer } from "@/trpc/server.ts";
 import { Fragment } from "preact";
 
 interface Data {
@@ -11,7 +11,7 @@ interface Data {
 export const handler: Handlers<Data> = {
   async GET(_req, ctx) {
     const { rawPost, renderedPostContent } =
-      await trpcClient.post.getPostRawAndRenderedContent.query(ctx.params.slug);
+      await trpcServer.post.getPostRawAndRenderedContent(ctx.params.slug);
     return ctx.render({ rawPost, renderedPostContent });
   },
 };

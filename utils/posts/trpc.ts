@@ -6,12 +6,12 @@ import {
   getPostList,
   getPostRaw,
   getPostRawList,
-} from "@/utils/posts/postCRUD.ts";
+} from "@/utils/posts/crud.ts";
 import {
   renderPostContent,
   renderPostRawContent,
   transformToPost,
-} from "@/utils/posts/postHelpers.ts";
+} from "@/utils/posts/helpers.ts";
 import { MyPostSchema } from "@/utils/posts/types.ts";
 import { z } from "zod";
 

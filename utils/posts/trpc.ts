@@ -75,4 +75,12 @@ export const postRouter = router({
         return renderPostContent(input);
       },
     ),
+  renderPostRawContent: publicProcedure
+    .input(z.string())
+    .output(z.string())
+    .query(
+      ({ input }) => {
+        return renderPostRawContent(input);
+      },
+    ),
 });

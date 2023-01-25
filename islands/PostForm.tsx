@@ -22,16 +22,21 @@ export type PostFormProps =
 
 const rawPostSignal = signal("");
 
-const post = signal<MyPost>({
+const postSignal = signal<MyPost>({
   content: "",
   publishedAt: new Date(),
   slug: "",
   title: "",
 });
 
-const renderedPostContent = signal("");
+const renderedPostContentSignal = signal("");
 
-export default function PostForm({ type, slug, rawPost }: PostFormProps) {
+export default function PostForm({
+  type,
+  slug,
+  rawPost,
+  renderedPostContent,
+}: PostFormProps) {
   const onSubmit: JSX.HTMLAttributes<HTMLFormElement>["onSubmit"] = async (
     e
   ) => {
@@ -52,24 +57,13 @@ export default function PostForm({ type, slug, rawPost }: PostFormProps) {
 
   const onClickPreview: JSX.HTMLAttributes<HTMLButtonElement>["onClick"] =
     async () => {
-      post.value = await trpcClient.post.transformToPost.query({
-        rawPost: rawPostSignal.value,
-      });
-      renderedPostContent.value = await trpcClient.post.renderPostContent.query(
-        post.value.content
-      );
+      renderedPostContentSignal.value =
+        await trpcClient.post.renderPostRawContent.query(rawPostSignal.value);
     };
 
   useEffect(() => {
     rawPostSignal.value = rawPost;
-    (async () => {
-      post.value = await trpcClient.post.transformToPost.query({
-        rawPost: rawPostSignal.value,
-      });
-      renderedPostContent.value = await trpcClient.post.renderPostContent.query(
-        post.value.content
-      );
-    })();
+    renderedPostContentSignal.value = renderedPostContent;
   }, []);
 
   return (
@@ -105,8 +99,8 @@ export default function PostForm({ type, slug, rawPost }: PostFormProps) {
         </form>
         <div class="h-[90vh] overflow-y-auto overflow-x-hidden">
           <PostDetail
-            post={post.value}
-            renderedPostContent={renderedPostContent.value}
+            post={postSignal.value}
+            renderedPostContent={renderedPostContentSignal.value}
           />
         </div>
       </div>

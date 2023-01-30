@@ -1,9 +1,9 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { PostPreview } from "@/components/PostPreview.tsx";
+import { trpcServer } from "@/trpc/server.ts";
 import { styles } from "@/utils/constants.ts";
 import { POST_ROUTES } from "@/utils/posts/constants.ts";
 import type { MyPost } from "@/utils/posts/types.ts";
-import { trpcServer } from "@/trpc/server.ts";
 
 export const handler: Handlers = {
   GET: async (_req, ctx) => {

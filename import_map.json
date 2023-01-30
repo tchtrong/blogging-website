@@ -9,7 +9,6 @@
     "@trpc/client/": "https://esm.sh/v103/*@trpc/client@10.9.0/",
     "@trpc/server": "https://esm.sh/v103/@trpc/server@10.9.0",
     "@trpc/server/": "https://esm.sh/v103/@trpc/server@10.9.0/",
-    "devalue": "https://esm.sh/v103/devalue@4.2.2",
     "preact-render-to-string": "https://esm.sh/v103/*preact-render-to-string@5.2.6",
     "preact-render-to-string/": "https://esm.sh/v103/*preact-render-to-string@5.2.6/",
     "preact": "https://esm.sh/v103/preact@10.11.3",

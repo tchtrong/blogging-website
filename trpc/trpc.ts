@@ -1,15 +1,6 @@
 import { Context } from "@/trpc/fetch-context.ts";
-import { CombinedDataTransformer, initTRPC } from "@trpc/server";
-import * as devalue from "devalue";
+import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
-
-export const transformer: CombinedDataTransformer = {
-  input: superjson,
-  output: {
-    deserialize: (object: unknown): unknown => eval(`(${object})`),
-    serialize: devalue.uneval,
-  },
-};
 
 const trpc = initTRPC.context<Context>().create({
   transformer: superjson,
